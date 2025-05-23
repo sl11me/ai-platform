@@ -1,0 +1,61 @@
+# Environnements virtuels Python
+venv/
+.env/
+.venv/
+env/
+ENV/
+
+# Fichiers compilés Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Notebooks Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Fichiers de logs
+*.log
+*.out
+*.err
+
+# Caches divers
+.cache/
+*.bak
+*.swp
+
+# Données temporaires
+*.tmp
+*.temp
+*.DS_Store
+
+# Jetons d'accès/API
+*.pem
+*.key
+*.crt
+*.env
+secrets.*
+
+# Docker
+docker-compose.override.yml
+.docker/
+*.tar
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+crash.log
+override.tf
+override.tf.json
+terraform.tfvars
+terraform.tfvars.json
+*.auto.tfvars
+.plan
+
+# VS Code / IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
