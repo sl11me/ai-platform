@@ -1,9 +1,10 @@
+# This GitHub Actions workflow builds a Docker image for the model API and deploys it to Azure Kubernetes Service (AKS).
 name: Build and Deploy to AKS
 
 on:
   push:
     branches:
-      - develop
+      - main
 
 env:
   IMAGE_NAME: model-api
@@ -39,3 +40,13 @@ jobs:
         run: |
           kubectl set image deployment/model-api model-api=${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           kubectl rollout status deployment/model-api
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Get AKS credentials
+        run: az aks get-credentials --resource-group ${{ secrets.AKS_RESOURCE_GROUP }} --name ${{ secrets.AKS_CLUSTER_NAME }} --overwrite-existing
+
+      - name: Test kubectl access
+        run: kubectl get nodes

@@ -7,7 +7,7 @@ variable "aks_cluster_name" {
 }
 
 variable "azurerm_container_registry_name" {
-  default = "ai-acr"
+  default = "aisl11mecontainerregistry"
 }
 
 variable "location" {
