@@ -3,11 +3,11 @@ variable "resource_group_name" {
 }
 
 variable "aks_cluster_name" {
-  default = "aks-cluster"
+  default = "aks-ai-cluster"
 }
 
 variable "azurerm_container_registry_name" {
-  default = "eastus"
+  default = "ai-acr"
 }
 
 variable "location" {
