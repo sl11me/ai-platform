@@ -1,0 +1,19 @@
+name: Deploy to Dev
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+      - name: Terraform Init & Apply
+        run: |
+          cd infra
+          terraform init -backend-config="dev/backend.conf"
+          terraform apply -var-file=dev/terraform.tfvars -auto-approve
