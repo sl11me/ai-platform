@@ -7,9 +7,9 @@ on:
     branches:
       - main
 
-env:
-  IMAGE_NAME: model-api
-  IMAGE_TAG: v1
+# env:
+#   IMAGE_NAME: model-api
+#   IMAGE_TAG: v1
 
 jobs:
   build-and-deploy:
@@ -42,15 +42,15 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v2
 
-      - name: Build and push image to ACR
-        uses: docker/build-push-action@v4
-        with:
-          context: ./model-api
-          push: true
-          tags: ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+      # - name: Build and push image to ACR
+      #   uses: docker/build-push-action@v4
+      #   with:
+      #     context: ./model-api
+      #     push: true
+      #     tags: ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
       - name: Get AKS credentials
         run: az aks get-credentials --resource-group ${{ secrets.AKS_RESOURCE_GROUP }} --name ${{ secrets.AKS_CLUSTER_NAME }} --overwrite-existing
