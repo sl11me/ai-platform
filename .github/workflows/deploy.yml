@@ -37,11 +37,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Log in to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
       # - name: Set up Docker Buildx
       #   uses: docker/setup-buildx-action@v2
 
@@ -51,22 +46,3 @@ jobs:
       #     context: ./model-api
       #     push: true
       #     tags: ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-
-      - name: Get AKS credentials
-        run: az aks get-credentials --resource-group ${{ secrets.AKS_RESOURCE_GROUP }} --name ${{ secrets.AKS_CLUSTER_NAME }} --overwrite-existing
-
-      - name: Deploy to AKS
-        run: |
-          kubectl set image deployment/model-api model-api=${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-          kubectl rollout status deployment/model-api
-
-      - name: Log in to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Get AKS credentials
-        run: az aks get-credentials --resource-group ${{ secrets.AKS_RESOURCE_GROUP }} --name ${{ secrets.AKS_CLUSTER_NAME }} --overwrite-existing
-
-      - name: Test kubectl access
-        run: kubectl get nodes
