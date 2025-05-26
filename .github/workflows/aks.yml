@@ -19,6 +19,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
   build_job_2:
+    needs: build_job_1
     runs-on: ubuntu-latest
     steps:
       - name: Get AKS credentials
