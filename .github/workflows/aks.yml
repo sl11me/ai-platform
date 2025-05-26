@@ -3,7 +3,7 @@ name: Continuous Integration
 on: [push, pull_request]
 
 jobs:
-  build:
+  build_job_1:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -18,8 +18,11 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # - name: Get AKS credentials
-      #   run: az aks get-credentials --resource-group ${{ secrets.AKS_RESOURCE_GROUP }} --name ${{ secrets.AKS_CLUSTER_NAME }} --overwrite-existing
+  build_job_2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get AKS credentials
+        run: az aks get-credentials --resource-group ${{ secrets.AKS_RESOURCE_GROUP }} --name ${{ secrets.AKS_CLUSTER_NAME }} --overwrite-existing
 
-      # - name: Test kubectl access
-      #   run: kubectl get nodes
+      - name: Test kubectl access
+        run: kubectl get nodes
